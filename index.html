@@ -1,0 +1,677 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>متجري</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- الهيدر -->
+    <header class="header">
+
+        <button class="menu-btn" id="menu-btn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="logo">CARE PLUS</div>
+
+        <nav class="nav">
+
+            <button onclick="show_home()">
+                الرئيسية
+            </button>
+
+            <button onclick="show_cart()">
+                <i class="fa-solid fa-cart-shopping"></i>
+                السلة
+                <span id="cart_count">0</span>
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- خلفية القائمة الجانبية -->
+    <div class="menu-overlay" id="menu-overlay"></div>
+
+
+    <!-- القائمة الجانبية -->
+    <aside class="side-menu" id="side-menu">
+
+        <div class="menu-head">
+
+            <h3>حسابي وخدماتي</h3>
+
+            <button id="close-menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <!-- بيانات المستخدم -->
+        <div class="menu-user">
+
+            <i class="fa-solid fa-circle-user"></i>
+
+            <div>
+                <h4>أهلاً بيك</h4>
+                <p>سجل الدخول للاستفادة من خدماتنا</p>
+            </div>
+
+        </div>
+
+
+        <!-- روابط القائمة -->
+        <div class="menu-links">
+
+            <button class="side-link" data-page="prescription_page">
+                <i class="fa-solid fa-file-prescription"></i>
+                <span>الروشتات الطبية</span>
+            </button>
+
+            <button class="side-link" data-page="health_page">
+                <i class="fa-solid fa-heart-pulse"></i>
+                <span>الملف الصحي</span>
+            </button>
+
+            <button class="side-link" id="login-link" data-page="login_page">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>تسجيل الدخول</span>
+            </button>
+
+            <button class="side-link" id="profile-link" data-page="profile_page" hidden>
+                <i class="fa-solid fa-user"></i>
+                <span>الملف الشخصي</span>
+            </button>
+
+            <button class="side-link" id="logout-btn" hidden>
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>تسجيل الخروج</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- محتوى الموقع -->
+    <main class="container">
+
+
+        <!-- ================= الرئيسية ================= -->
+        <section id="home_page" class="page active">
+
+            <div class="hero">
+
+                <h1>اكتشفي منتجاتك المفضلة</h1>
+
+                <p>
+                    اختاري القسم المناسب وشوفي مجموعة المنتجات المتاحة
+                </p>
+
+            </div>
+
+
+            <h2 class="section_title">
+                المنتجات الأكثر طلباً
+            </h2>
+
+
+            <div class="category_grid">
+
+
+                <!-- قسم كريم التخسيس -->
+                <div class="category_card" onclick="show_category('slim')">
+
+                    <img src="images/كريم سلوليت.jpeg" alt="كريم التخسيس">
+
+                    <div class="category_info">
+
+                        <h3>كريم التخسيس</h3>
+
+                        <p>اكتشفي منتجات العناية بالجسم</p>
+
+                        <span>
+                            تسوقي الآن
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- قسم كريم البشرة -->
+                <div class="category_card" onclick="show_category('skin')">
+
+                    <img src="images/كريم بشرة.jpeg" alt="كريم البشرة">
+
+                    <div class="category_info">
+
+                        <h3>كريم البشرة</h3>
+
+                        <p>منتجات للعناية ببشرتك</p>
+
+                        <span>
+                            تسوقي الآن
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- قسم الشاور جل -->
+                <div class="category_card" onclick="show_category('shower')">
+
+                    <img src="images/شاور.jpeg" alt="الشاور جل">
+
+                    <div class="category_info">
+
+                        <h3>الشاور جل</h3>
+
+                        <p>اختاري منتجات النظافة اليومية</p>
+
+                        <span>
+                            تسوق الآن
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= صفحة الأقسام ================= -->
+        <section id="category_page" class="page">
+
+            <button class="back_btn" onclick="show_home()">
+                <i class="fa-solid fa-arrow-right"></i>
+                رجوع للأقسام
+            </button>
+
+
+            <h2 id="category_title" class="section_title"></h2>
+
+
+            <div class="tools">
+
+                <input
+                    type="text"
+                    id="search_input"
+                    placeholder="ابحثي عن منتج..."
+                    oninput="search_products()"
+                >
+
+
+                <select id="sort_select" onchange="sort_products()">
+
+                    <option value="default">ترتيب المنتجات</option>
+
+                    <option value="low">
+                        السعر من الأقل للأعلى
+                    </option>
+
+                    <option value="high">
+                        السعر من الأعلى للأقل
+                    </option>
+
+                    <option value="name">
+                        الاسم
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div id="product_grid" class="product_grid"></div>
+
+        </section>
+
+
+
+        <!-- ================= تفاصيل المنتج ================= -->
+        <section id="details_page" class="page">
+
+            <button class="back_btn" onclick="back_to_category()">
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+                رجوع للمنتجات
+
+            </button>
+
+
+            <div id="product_details" class="details_box"></div>
+
+
+            <h2 class="section_title">
+                منتجات مشابهة
+            </h2>
+
+
+            <div id="related_grid" class="product_grid"></div>
+
+        </section>
+
+
+
+        <!-- ================= صفحة السلة ================= -->
+        <section id="cart_page" class="page">
+
+            <button class="back_btn" onclick="show_home()">
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+                متابعة التسوق
+
+            </button>
+
+
+            <h2 class="section_title">
+                سلة المشتريات
+            </h2>
+
+
+            <div id="cart_items"></div>
+
+
+            <div class="cart_summary">
+
+                <h3>ملخص الطلب</h3>
+
+                <p>
+                    الإجمالي:
+                    <strong id="cart_total">0</strong>
+                    جنيه
+                </p>
+
+
+                <button class="main_btn" onclick="checkout()">
+                    إتمام الطلب
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= صفحة الروشتات الطبية ================= -->
+       
+<!-- صفحة الروشتات الطبية -->
+<section id="prescription_page" class="page">
+
+    <div class="pres-box">
+
+        <button class="back_btn" onclick="show_home()">
+            <i class="fa-solid fa-arrow-right"></i>
+            رجوع
+        </button>
+
+        <div class="pres-head">
+            <div class="pres-icon">
+                <i class="fa-solid fa-file-prescription"></i>
+            </div>
+
+            <h2>الروشتات الطبية</h2>
+            <p>ارفعي صورة الروشتة واكتبي أي ملاحظات تخص طلبك</p>
+        </div>
+
+        <!-- اختيار الصور -->
+        <div class="pres-upload">
+
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+
+            <h3>اختاري صور الروشتة</h3>
+
+            <p>تقدري تختاري صورة أو أكتر من جهازك</p>
+
+            <label for="prescription_file" class="pres-choose">
+                <i class="fa-solid fa-image"></i>
+                اختيار الصور
+            </label>
+
+            <input
+                type="file"
+                id="prescription_file"
+                accept="image/*"
+                multiple
+                hidden
+            >
+
+            <label for="prescription_camera" class="pres-camera">
+                <i class="fa-solid fa-camera"></i>
+                تصوير الروشتة
+            </label>
+
+            <input
+                type="file"
+                id="prescription_camera"
+                accept="image/*"
+                capture="environment"
+                hidden
+            >
+
+        </div>
+
+        <!-- الصور المختارة -->
+        <div class="pres-gallery-box">
+
+            <h3>الصور المرفوعة</h3>
+
+            <p id="prescription_empty">
+                لسه مفيش صور. اختاري صورة الروشتة علشان تظهر هنا.
+            </p>
+
+            <div id="prescription_gallery" class="pres-gallery"></div>
+
+        </div>
+
+        <!-- التعليقات -->
+        <div class="pres-notes">
+
+            <label for="prescription_notes">
+                <i class="fa-solid fa-pen"></i>
+                ملاحظات وتعليقات (اختياري)
+            </label>
+
+            <textarea
+                id="prescription_notes"
+                rows="5"
+                placeholder="اكتبي أي ملاحظات تخص الروشتة أو الأدوية أو ميعاد التوصيل..."
+            ></textarea>
+
+        </div>
+
+        <p class="error" id="prescription_error"></p>
+
+        <button type="button" class="main_btn" id="prescription_btn">
+            <i class="fa-solid fa-paper-plane"></i>
+            إرسال الروشتة
+        </button>
+
+        <p id="prescription_success" class="pres-success"></p>
+
+    </div>
+
+
+    <!-- نافذة عرض الصورة بحجم كبير -->
+    <div id="prescription_viewer" class="pres-viewer">
+
+        <button type="button" id="prescription_close" class="pres-close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <img id="prescription_large" src="" alt="صورة الروشتة">
+
+    </div>
+
+</section>
+
+
+
+
+        <!-- ================= صفحة الملف الصحي ================= -->
+        <section id="health_page" class="page">
+
+            <div class="auth">
+
+                <button class="back_btn" onclick="show_home()">
+                    <i class="fa-solid fa-arrow-right"></i>
+                    رجوع
+                </button>
+
+
+                <div class="auth-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+
+
+                <h2>الملف الصحي</h2>
+
+                <p>
+                    تابعي بياناتك الصحية وملفاتك الطبية من مكان واحد
+                </p>
+
+
+                <div class="health-info">
+
+                    <p>
+                        <i class="fa-solid fa-user"></i>
+                        بيانات المستخدم
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-file-prescription"></i>
+                        الروشتات الطبية
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-notes-medical"></i>
+                        السجل الصحي
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= صفحة تسجيل الدخول ================= -->
+        <section id="login_page" class="page">
+
+            <div class="auth">
+
+                <button class="back_btn" onclick="show_home()">
+                    رجوع
+                </button>
+
+
+                <div class="auth-icon">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+
+
+<h2>CARE PLUS اهلا بيك في </h2>
+                <p>
+                    سجلي رقم موبايلك للمتابعة
+                </p>
+
+
+                <label for="phone">
+                    رقم الموبايل
+                </label>
+
+
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="01xxxxxxxxx"
+                    maxlength="11"
+                >
+
+
+                <p class="error" id="phone-error"></p>
+
+
+                <button class="main_btn" id="phone-btn">
+                    متابعة
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= صفحة كود التحقق ================= -->
+        <section id="otp_page" class="page">
+
+            <div class="auth">
+
+                <div class="auth-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+
+                <h2>تأكيد رقم الموبايل</h2>
+
+                <p>
+                    اكتبي كود التحقق المكون من 6 أرقام
+                </p>
+
+
+                <input
+                    type="text"
+                    id="otp"
+                    placeholder="000000"
+                    maxlength="6"
+                    inputmode="numeric"
+                >
+
+
+                <p class="error" id="otp-error"></p>
+
+
+                <button class="main_btn" id="otp-btn">
+                    تأكيد
+                </button>
+
+
+                <button class="text-btn" id="resend">
+                    إعادة إرسال الكود
+                </button>
+
+
+                <button class="text-btn" onclick="show_page('login_page')">
+                    تغيير رقم الموبايل
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= صفحة البيانات الشخصية ================= -->
+        <section id="register_page" class="page">
+
+            <div class="auth">
+
+                <div class="auth-icon">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+
+
+                <h2>استكملي بياناتك</h2>
+
+                <p>
+                    علشان نقدر نخدمك بشكل أفضل
+                </p>
+
+
+                <label for="name">
+                    الاسم بالكامل
+                </label>
+
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="اكتبي اسمك"
+                >
+
+
+                <label for="email">
+                    البريد الإلكتروني
+                </label>
+
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="example@gmail.com"
+                >
+
+
+                <p class="error" id="register-error"></p>
+
+
+                <button class="main_btn" id="save-btn">
+                    حفظ البيانات
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= صفحة الملف الشخصي ================= -->
+        <section id="profile_page" class="page">
+
+            <div class="auth">
+
+                <div class="auth-icon">
+                    <i class="fa-solid fa-circle-user"></i>
+                </div>
+
+
+                <h2>الملف الشخصي</h2>
+
+
+                <p id="user-name"></p>
+
+                <p id="user-phone"></p>
+
+                <p id="user-email"></p>
+
+
+                <button class="main_btn" onclick="show_home()">
+                    الرئيسية
+                </button>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ملف JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
